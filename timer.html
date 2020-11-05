@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		html {
+			background-color: darkblue;
+			color: #fff;
+		}
+		.timer-speaker-page .timer-speaker-body {
+			font-size: 1.250rem;
+			border: 2px solid #fff;
+			border-radius: 20px;
+			box-shadow: 0px 0px 30px 0px #fff;
+			padding-left: 2.5rem;
+			padding-right: 2.5rem;
+			height: 200px;
+		}
+
+		.timer-speaker-page .timer-speaker-ps .ps {
+			position: relative;
+			padding-left: 4rem;
+			padding-right: 4rem;
+			font-size: 1rem;
+			margin-top: 4rem;
+			margin-bottom: 2rem;
+		}
+
+		.timer-speaker-page .timer-speaker-ps .ps::after {
+			content: "P.S.";
+			display: inline-block;
+			position: absolute;
+			left: 1rem;
+			top: 50%;
+			-moz-transform: translate(0, -50%);
+			-ms-transform: translate(0, -50%);
+			-webkit-transform: translate(0, -50%);
+			transform: translate(0, -50%);
+			font-weight: 600;
+			color: #008dd2;
+			font-size: 1.1rem;
+		}
+
+		.timer-speaker-page .timer-speaker-ps .ps a {
+			color: #fff;
+			text-decoration: underline;
+		}
+
+		.timer-speaker-page .timer-speaker-body .hours::before {
+			content: ":";
+			display: inline-block;
+			position: relative;
+			left: -45px;
+			top: -5px;
+		}
+
+		.timer-speaker-page .timer-speaker-body .minutes::before {
+			content: ":";
+			display: inline-block;
+			position: relative;
+			left: -45px;
+			top: -5px;
+		}
+
+		.timer-speaker-page .timer-speaker-body .minutes::before,
+		.timer-speaker-page .timer-speaker-body .hours::before {
+			animation: blink 2s linear infinite;
+		}
+
+		@keyframes blink {
+			50% {
+				color: rgb(255, 255, 255);
+			}
+
+			51% {
+				color: rgba(255, 255, 255, 0);
+			}
+
+			100% {
+				color: rgba(255, 255, 255, 0);
+			}
+		}
+
+		.timer-speaker-page .timer-speaker-body .number {
+			font-size: 3rem;
+		}
+
+		.timer-speaker-page .timer-speaker-body .timer-title {
+			color: #ffb643;
+			text-shadow: 0 0 20px rgb(255, 182, 67) !important
+		}
+
+		.timer-speaker-page .timer-speaker-body {
+			font-size: 1.250rem;
+			border: 2px solid #fff;
+			border-radius: 20px;
+			box-shadow: 0px 0px 30px 0px #fff;
+			padding-left: 2.5rem;
+			padding-right: 2.5rem;
+		}
+
+		.timer-speaker-page .timer-speaker-body .time-number {
+			line-height: 1.2;
+		}
+		.col-md-5 {
+			width: 25%;
+			margin: auto;
+		}
+		.time-number {
+			display: flex;
+		}
+		.col-4 {
+			width: 33.333333%;
+			text-align: center;
+		}
+		.time-number {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: 50%;
+		}
+		.timer-title {
+			height: 25%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		@media (min-width: 300px) and (max-width: 767px) {
+			html {
+				font-size: 11px;
+			}
+			.col-md-5 {
+				width: 100%;
+			}
+
+			.timer-speaker-page .timer-speaker-body {
+				font-size: 1.5rem;
+			}
+
+			.timer-speaker-page .timer-speaker-body .number {
+				font-size: 2.7rem;
+			}
+
+			.timer-speaker-page .timer-speaker-body .number+div {
+				font-size: 1rem;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="row timer-speaker-page">
+			<div class="offset-md-3 col-md-5 timer-speaker-body">
+				<div class="timer-title pt-3 pb-3">Удобный таймер</div>
+				<div class="row time-number">
+					<div class="col-4">
+						<div id="timer_days" class="days number">-188</div>
+						<div>дней</div>
+					</div>
+					<div class="col-4">
+						<div id="timer_hours" class="hours number">-15</div>
+						<div>часов</div>
+					</div>
+					<div class="col-4">
+						<div id="timer_minutes" class="minutes number">-44</div>
+						<div>минут</div>
+					</div>
+				</div>
+				<div class="timer-title pt-3 pb-4">Обратного отсчета</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		function setTimer() {
+			let date_now = new Date();
+			let date = new Date('11/27/2020');
+			let timer = date - date_now;
+			let days = parseInt(timer / (3600000 * 24));
+			let hours = parseInt((timer / 3600000) - (days * 24));
+			let minutes = parseInt((timer / 60000) - ((days * 1440) + (hours * 60)));
+			document.getElementById("timer_days").innerHTML = days;
+			document.getElementById("timer_hours").innerHTML = hours;
+			document.getElementById("timer_minutes").innerHTML = minutes;
+		}
+		setTimer();
+		setInterval(setTimer, 1000);
+	</script>
+</body>
+
+</html>
