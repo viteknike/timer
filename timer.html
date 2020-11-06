@@ -10,6 +10,7 @@
 			background-color: darkblue;
 			color: #fff;
 		}
+
 		.timer-speaker-page .timer-speaker-body {
 			font-size: 1.250rem;
 			border: 2px solid #fff;
@@ -18,30 +19,6 @@
 			padding-left: 2.5rem;
 			padding-right: 2.5rem;
 			height: 200px;
-		}
-
-		.timer-speaker-page .timer-speaker-ps .ps {
-			position: relative;
-			padding-left: 4rem;
-			padding-right: 4rem;
-			font-size: 1rem;
-			margin-top: 4rem;
-			margin-bottom: 2rem;
-		}
-
-		.timer-speaker-page .timer-speaker-ps .ps::after {
-			content: "P.S.";
-			display: inline-block;
-			position: absolute;
-			left: 1rem;
-			top: 50%;
-			-moz-transform: translate(0, -50%);
-			-ms-transform: translate(0, -50%);
-			-webkit-transform: translate(0, -50%);
-			transform: translate(0, -50%);
-			font-weight: 600;
-			color: #008dd2;
-			font-size: 1.1rem;
 		}
 
 		.timer-speaker-page .timer-speaker-ps .ps a {
@@ -105,33 +82,40 @@
 		.timer-speaker-page .timer-speaker-body .time-number {
 			line-height: 1.2;
 		}
+
 		.col-md-5 {
 			width: 25%;
 			margin: auto;
 		}
+
 		.time-number {
 			display: flex;
 		}
+
 		.col-4 {
 			width: 33.333333%;
 			text-align: center;
 		}
+
 		.time-number {
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			height: 50%;
 		}
+
 		.timer-title {
 			height: 25%;
 			display: flex;
 			align-items: center;
 			justify-content: center;
 		}
+
 		@media (min-width: 300px) and (max-width: 767px) {
 			html {
 				font-size: 11px;
 			}
+
 			.col-md-5 {
 				width: 100%;
 			}
@@ -177,14 +161,30 @@
 	<script>
 		function setTimer() {
 			let date_now = new Date();
-			let date = new Date('11/27/2020');
+			let date = new Date('11/28/2020');
 			let timer = date - date_now;
 			let days = parseInt(timer / (3600000 * 24));
 			let hours = parseInt((timer / 3600000) - (days * 24));
 			let minutes = parseInt((timer / 60000) - ((days * 1440) + (hours * 60)));
-			document.getElementById("timer_days").innerHTML = days;
-			document.getElementById("timer_hours").innerHTML = hours;
-			document.getElementById("timer_minutes").innerHTML = minutes;
+			if (days >= '9', hours >= '9', minutes > '9') {
+				document.getElementById("timer_days").innerHTML = days;
+			}
+			else {
+				document.getElementById("timer_days").innerHTML = '0' + days;
+			}
+			if (hours >= '9') {
+				document.getElementById("timer_hours").innerHTML = hours;
+			}
+			else {
+				document.getElementById("timer_hours").innerHTML = '0' + hours;
+			}
+			if (minutes > '9') {
+				document.getElementById("timer_minutes").innerHTML = minutes;
+
+			}
+			else {
+				document.getElementById("timer_minutes").innerHTML = '0' + minutes;
+			}
 		}
 		setTimer();
 		setInterval(setTimer, 1000);
