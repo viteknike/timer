@@ -7,18 +7,31 @@
 	<title>Document</title>
 	<style>
 		html {
-			background-color: darkblue;
 			color: #fff;
 		}
 
-		.timer-speaker-page .timer-speaker-body {
-			font-size: 1.250rem;
-			border: 2px solid #fff;
-			border-radius: 20px;
-			box-shadow: 0px 0px 30px 0px #fff;
-			padding-left: 2.5rem;
-			padding-right: 2.5rem;
-			height: 200px;
+		.timer-speaker-page .timer-speaker-ps .ps {
+			position: relative;
+			padding-left: 4rem;
+			padding-right: 4rem;
+			font-size: 1rem;
+			margin-top: 4rem;
+			margin-bottom: 2rem;
+		}
+
+		.timer-speaker-page .timer-speaker-ps .ps::after {
+			content: "P.S.";
+			display: inline-block;
+			position: absolute;
+			left: 1rem;
+			top: 50%;
+			-moz-transform: translate(0, -50%);
+			-ms-transform: translate(0, -50%);
+			-webkit-transform: translate(0, -50%);
+			transform: translate(0, -50%);
+			font-weight: 600;
+			color: #008dd2;
+			font-size: 1.1rem;
 		}
 
 		.timer-speaker-page .timer-speaker-ps .ps a {
@@ -29,22 +42,41 @@
 		.timer-speaker-page .timer-speaker-body .hours::before {
 			content: ":";
 			display: inline-block;
-			position: relative;
-			left: -45px;
-			top: -5px;
+			position: relative;    
+			left: -7%;
+    		top: -19px;
 		}
 
 		.timer-speaker-page .timer-speaker-body .minutes::before {
 			content: ":";
 			display: inline-block;
 			position: relative;
-			left: -45px;
-			top: -5px;
+			left: -7%;
+			top: -19px;
 		}
 
 		.timer-speaker-page .timer-speaker-body .minutes::before,
 		.timer-speaker-page .timer-speaker-body .hours::before {
 			animation: blink 2s linear infinite;
+		}
+		span {
+			width: 60px;
+			height: 100px;
+			margin-right: 10px;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			background-color: black;
+			font-size: 90px;
+			font-weight: 800;
+			border-radius: 10px;
+		}
+		span.num::before {
+			content: '';
+			position: absolute;
+			height: 4px;
+			width: 55px;
+			background: #000;
 		}
 
 		@keyframes blink {
@@ -66,56 +98,39 @@
 		}
 
 		.timer-speaker-page .timer-speaker-body .timer-title {
-			color: #ffb643;
-			text-shadow: 0 0 20px rgb(255, 182, 67) !important
+			font-size: 20px;
+			margin-left: 15px;
+			margin-bottom: 20px;
 		}
 
 		.timer-speaker-page .timer-speaker-body {
 			font-size: 1.250rem;
-			border: 2px solid #fff;
-			border-radius: 20px;
-			box-shadow: 0px 0px 30px 0px #fff;
-			padding-left: 2.5rem;
-			padding-right: 2.5rem;
 		}
 
 		.timer-speaker-page .timer-speaker-body .time-number {
 			line-height: 1.2;
 		}
-
 		.col-md-5 {
 			width: 25%;
 			margin: auto;
 		}
-
 		.time-number {
 			display: flex;
 		}
-
 		.col-4 {
 			width: 33.333333%;
 			text-align: center;
 		}
-
 		.time-number {
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			height: 50%;
 		}
-
-		.timer-title {
-			height: 25%;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-		}
-
 		@media (min-width: 300px) and (max-width: 767px) {
 			html {
 				font-size: 11px;
 			}
-
 			.col-md-5 {
 				width: 100%;
 			}
@@ -139,56 +154,78 @@
 	<div class="container">
 		<div class="row timer-speaker-page">
 			<div class="offset-md-3 col-md-5 timer-speaker-body">
-				<div class="timer-title pt-3 pb-3">Удобный таймер</div>
+				<div class="timer-title pt-3 pb-3">какая-нибудь надпись описания таймера</div>
 				<div class="row time-number">
 					<div class="col-4">
-						<div id="timer_days" class="days number">-188</div>
+						<div id="timer_days" class="days number"><span class="num" id="oneDays">2</span><span class="num" id="twoDays">0</span></div>
 						<div>дней</div>
 					</div>
 					<div class="col-4">
-						<div id="timer_hours" class="hours number">-15</div>
+						<div id="timer_hours" class="hours number"><span class="num" id="oneHour">1</span><span class="num" id="twoHour">5</span></div>
 						<div>часов</div>
 					</div>
 					<div class="col-4">
-						<div id="timer_minutes" class="minutes number">-44</div>
+						<div id="timer_minutes" class="minutes number"><span class="num" id="oneMin">4</span><span class="num" id="twoMin">3</span></div>
 						<div>минут</div>
 					</div>
 				</div>
-				<div class="timer-title pt-3 pb-4">Обратного отсчета</div>
 			</div>
 		</div>
 	</div>
 	<script>
-		function setTimer() {
+		//function setTimer() {
 			let date_now = new Date();
-			let date = new Date('11/28/2020');
+			let date = new Date('11/27/2020');
 			let timer = date - date_now;
 			let days = parseInt(timer / (3600000 * 24));
 			let hours = parseInt((timer / 3600000) - (days * 24));
 			let minutes = parseInt((timer / 60000) - ((days * 1440) + (hours * 60)));
-			if (days >= '9', hours >= '9', minutes > '9') {
-				document.getElementById("timer_days").innerHTML = days;
-			}
-			else {
-				document.getElementById("timer_days").innerHTML = '0' + days;
-			}
-			if (hours >= '9') {
-				document.getElementById("timer_hours").innerHTML = hours;
-			}
-			else {
-				document.getElementById("timer_hours").innerHTML = '0' + hours;
-			}
-			if (minutes > '9') {
-				document.getElementById("timer_minutes").innerHTML = minutes;
+			let daysOne = String(days).split("");
+			let hoursOne = String(hours).split("");
+			let minutesOne = String(minutes).split("");
 
+				//  Выводим дни
+
+			
+			if (daysOne[1] != undefined) {
+				document.getElementById("oneDays").innerHTML = daysOne[0];
+				document.getElementById("twoDays").innerHTML = daysOne[1];
+				console.log(daysOne[0])
 			}
 			else {
-				document.getElementById("timer_minutes").innerHTML = '0' + minutes;
+				daysOne.unshift('0')
+				document.getElementById("oneDays").innerHTML = daysOne[0]
+				document.getElementById("twoDays").innerHTML = daysOne[1];
+				console.log(daysOne[0]);
+			}
+
+				//Выводим часы
+
+			if (hoursOne[1] != undefined) {
+				document.getElementById("oneHour").innerHTML = hoursOne[0];
+				document.getElementById("twoHour").innerHTML = hoursOne[1];
+				console.log(hoursOne[1])
+			} else {
+				hoursOne.unshift('0')
+				document.getElementById("oneHour").innerHTML = hoursOne[0];
+				document.getElementById("twoHour").innerHTML = hoursOne[1];
+			}
+				//Выводим минуты
+
+			if (minutesOne[1] != undefined) {
+				document.getElementById("twoMin").innerHTML = minutesOne[1];
+				document.getElementById("oneMin").innerHTML = minutesOne[0];
+				console.log(minutesOne[1])
+			} else {
+				minutesOne.unshift('0')
+				document.getElementById("oneMin").innerHTML = minutesOne[0];
+				document.getElementById("twoMin").innerHTML = minutesOne[1];
 			}
 		}
+
+
 		setTimer();
 		setInterval(setTimer, 1000);
 	</script>
 </body>
-
 </html>
